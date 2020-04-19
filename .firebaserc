@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "firechats-941e2": {
+      "hosting": {
+        "loginApp": [
+          "firechats-941e2"
+        ]
+      }
+    }
+  }
+}
