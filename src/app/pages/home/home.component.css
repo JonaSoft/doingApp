@@ -14,7 +14,8 @@
 }
 
 .chat-window {
-    height: 500px;
+    height: 360px;
+    min-height: auto;
     overflow: hidden;
     border: 3px outset gray;
     border-radius: 20px;
@@ -31,7 +32,7 @@
 
 .app-mensajes {
     overflow-y: scroll;
-    height: 490px;
+    height: 350px;
     padding: 3px;
     font-family: tahoma;
     font-size: 15px;
