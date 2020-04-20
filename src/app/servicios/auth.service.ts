@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
+
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
 import { HttpClient } from '@angular/common/http';
 import { UsuarioModel } from '../models/usuario.models';
 import { map } from 'rxjs/operators';
+import { User} from '../interfaces/user.interface'
 
 
 @Injectable({
@@ -11,6 +16,8 @@ export class AuthService {
   private url ='https://identitytoolkit.googleapis.com/v1/accounts:'
   private apikey ='AIzaSyDBdopumVSXbxMzKS9FzqclkVXzF5s7GQw';
 
+  private imagenCollection: AngularFirestoreCollection<User>;
+  usuario: Observable<User[]>;
 
   userToken:string;
   usuarioEmail:string
@@ -43,7 +50,7 @@ export class AuthService {
       map( res=>{
         this.guardarToken( res['idToken']);
         this.guardarEmail(res['email']);
-        console.log('desde auth users',res)
+        console.log('desde auth users',res['email'])
         return res
       })
     )

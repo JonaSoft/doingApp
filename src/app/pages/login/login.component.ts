@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/servicios/auth.service';
 import  Swal  from 'sweetalert2';
 import { Router } from '@angular/router';
+import { FirestorechatsService } from 'src/app/servicios/firestorechats.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
   recuerdaUsuario=false;
 
   constructor(private auth:AuthService,
-              private router:Router) { }
+              private router:Router,
+              public _cs: FirestorechatsService,
+              ) { }
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
@@ -33,12 +36,13 @@ export class LoginComponent implements OnInit {
       allowOutsideClick: false
      });
      Swal.showLoading();
-
+    console.log('envia al login',this.usuario)
     this.auth.login(this.usuario)
       .subscribe(res =>{
-          //console.log('que hallo',res)
+          console.log('que hallo',res['email'])
           Swal.close();
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/home');
+          this._cs.agregarUsuario(res['email'])
       },(err)=>{
         console.log(err.error.error.message)
         Swal.fire({

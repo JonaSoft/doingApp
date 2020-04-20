@@ -1,56 +1,78 @@
 <div class="row mt-5" >
+  <div class="col-md-6 d-flex justify-content-center">
+
   
-  <div class="contenedorchat"style="padding:3px;">
-  
- 
-    <div class="col-md-12  text-center">
-        <span class="titulousuarios">Doing App</span>
-    </div>
-    <br>
-    <div class="container-fluid chat-window" style="background:white; color: black;border-radius:5px 5px 5px 5px;">
-        <div class="main-container app-mensajes" id="app-mensajes">
-            <div *ngFor="let chat of _cs.chats">
-               
-                <div [ngClass]="{'text-left ':usuarionombre != chat.nombre,
-                                 'text-right ':usuarionombre == chat.nombre}">
-                    <span class="badge" [ngClass]="{'badge-primary':usuarionombre == chat.nombre,
-                                      'badge-success':usuarionombre != chat.nombre }">
-                        {{chat.nombre}}
-                    </span>
+        <div class="contenedorchat"style="padding:3px;">
+        
+        
+            <div class="col-md-12  text-center">
+                <span class="titulousuarios">Doing App</span>
+            </div>
+            <br>
+            <div class="container-fluid chat-window" style="background:white; color: black;border-radius:5px 5px 5px 5px;">
+                <div class="main-container app-mensajes" id="app-mensajes">
+                    <div *ngFor="let chat of _cs.chats">
                     
-                    <div>
-                        <span style="font-size:11px;color:gray">
-                            [{{chat.fecha | date:'medium'}}] dice:
-                        </span>
-                        <span > {{chat.mensaje}} </span>
+                        <div [ngClass]="{'text-left ':usuarionombre != chat.nombre,
+                                        'text-right ':usuarionombre == chat.nombre}">
+                            <span class="badge" [ngClass]="{'badge-primary':usuarionombre == chat.nombre,
+                                            'badge-success':usuarionombre != chat.nombre }">
+                                {{chat.nombre}}
+                            </span>
+                            
+                            <div>
+                                <span style="font-size:11px;color:gray">
+                                    [{{chat.fecha | date:'medium'}}] dice:
+                                </span>
+                                <span > {{chat.mensaje}} </span>
+                                
+                            </div>
+                        </div>
                         
                     </div>
+                    
                 </div>
-                
+        
             </div>
+        
+            <div class=" container-fluid send-window " style="margin-top:15px;">
+                <input id="btn-input" type="text" class="form-control" name="mensaje" [(ngModel)]="mensaje" (KeyUp.enter)="enviarMensaje()" placeholder="Send message..." />
             
+            </div>
+            <div class="container text-right m-2">
+            <button
+            class="btn btn-danger m-auto"
+            (click)="salir()"
+            >Salir
+        </button>
+            </div>
+        
+        
         </div>
-  
     </div>
-  
-    <div class=" container-fluid send-window " style="margin-top:15px;">
-        <input id="btn-input" type="text" class="form-control" name="mensaje" [(ngModel)]="mensaje" (KeyUp.enter)="enviarMensaje()" placeholder="Send message..." />
-       
+    <div class="col-md-6 d-flex justify-content-center p-2">
+        <br>
+        <div  class="container m-auto" style="width:50%; height:350px; overflow-y: auto;">
+            <table class="table table-dark">
+               
+               
+                    <span class="titulousuarios">Users Online</span>
+                   
+               
+                <tbody>
+                  <tr>
+                    <td>
+                        <p *ngFor="let users of usuarios" style="color: white;opacity:0.75;">{{users.email}}</p>
+                    </td>
+                   
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+        
+        </div>
     </div>
-    <div class="container text-right m-2">
-      <button
-    class="btn btn-danger m-auto"
-    (click)="salir()"
-    >Salir
-  </button>
-    </div>
-  
-  
-  </div>
-  
-  <div *ngFor="let chat of _cs.chats" class="container bg-white" style="width:250px; height:250px">
-    {{chat.nombre}}
-</div>
 
 </div>
 

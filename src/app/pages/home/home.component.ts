@@ -20,11 +20,12 @@ export class HomeComponent implements OnInit {
   public usuarionombre:string="";
   public chats: Observable<any[]>;
   public mensajes:any[]=[];
-  public users:any[]=[];
+  public users: Observable<any[]>;
+  public usuarios=[]
 
   constructor(  private auth:AuthService,
                 private router:Router,
-                db: AngularFirestore,
+                public db: AngularFirestore,
                 public _cs: FirestorechatsService,
                 public _usuario: AuthService
                 )
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
         //oir cambios en collecciones de chats            
         this.chats = db.collection('chats').valueChanges();
         //console.log('chats',_cs.chats)
+        //this.users = db.collection('users').valueChanges();
     
         //cargar mensajes des el servicio
         this._cs.cargarMensajes()
@@ -49,12 +51,19 @@ export class HomeComponent implements OnInit {
              
         });
 
+        this._cs.cargarUsers()
+          .subscribe(users=>{
+            console.log(users)
+            this.usuarios=users
+
+          })
        }
 
   ngOnInit() {
     this.elemento = document.getElementById('app-mensajes');
     if(!localStorage.getItem('token') || (!localStorage.getItem('email'))){
-      this.salir()
+      this.auth.logout();
+      this.router.navigateByUrl('/login')
       //this.router.navigateByUrl('/login')
     }
   }
@@ -74,6 +83,15 @@ export class HomeComponent implements OnInit {
   }
   
   salir(){
+    let eliminausuario = this.usuarios.filter(porborrar => porborrar.email == localStorage.getItem('email'))
+    console.log('que eliminara',eliminausuario)
+    //let eliminausuario=localStorage.getItem('email')
+    this.db.collection("users").doc(eliminausuario[0].uid).delete().then(function() {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+
     this.auth.logout();
     this.router.navigateByUrl('/login')
   }
