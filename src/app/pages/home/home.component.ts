@@ -39,15 +39,22 @@ export class HomeComponent implements OnInit {
         //cargar mensajes des el servicio
         this._cs.cargarMensajes()
           .subscribe( (res)=>{
+            console.log(res.length)
             //console.log('mensajes',res[7].nombre)
             //console.log(localStorage.getItem('email'))
-            if (res[7].nombre!=localStorage.getItem('email')){
-              this.reproducir()
+            let elemento = res.length
+            elemento=elemento-1
+            console.log(elemento)
+            if (elemento!=-1){
+              if (res[elemento].nombre!=localStorage.getItem('email')){
+                this.reproducir()
+              }
+              setTimeout(() => {
+                this.elemento.scrollTop = this.elemento.scrollHeight;
+                
+              }, 25);
             }
-            setTimeout(() => {
-              this.elemento.scrollTop = this.elemento.scrollHeight;
-              
-            }, 25);
+            
              
         });
 

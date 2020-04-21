@@ -39,10 +39,10 @@
 }
 
 .titulousuarios {
-    font-size: 1.5rem;
+    font-size:18px;
     
-    color: gray;
-    font-family: cursive, tahoma
+    color: rgb(219, 215, 215);
+    font-family: tahoma,cursive;
 }
 
 
