@@ -1,12 +1,14 @@
-<div class="row mt-5" >
+<app-navbar></app-navbar>
+<div class="row mt-2" >
+    
   <div class="col-md-6 d-flex justify-content-center">
 
   
         <div class="contenedorchat"style="padding:3px;">
-        
+            
         
             <div class="col-md-12  text-center">
-                <span class="titulousuarios">Doing App</span>
+                <span class="titulousuarios">Doing App </span>
             </div>
             <br>
             <div class="container-fluid chat-window" style="background:white; color: black;border-radius:5px 5px 5px 5px;">
@@ -27,6 +29,10 @@
                                 </span>
                             </div>
                             {{chat.mensaje}}
+                            <a [href]="chat.url" class="card-title">
+                                <img [src]="chat.url" class="card-img-top"  style="width:50%; height:auto;">    
+                            </a>
+                           
                         </div>
                        
                     
@@ -38,16 +44,15 @@
         
             </div>
         
-            <div class=" container-fluid send-window " style="margin-top:15px;">
+            <div appNgDropFiles [archivos]="archivos"
+             (mouseSobre)="pruebaSobreInput($event)" [ngClass]="{'file-over': estaSobreInput }" class=" container-fluid send-window " style="margin-top:15px;">
+                
                 <input id="btn-input" type="text" class="form-control" name="mensaje" [(ngModel)]="mensaje" (KeyUp.enter)="enviarMensaje()" placeholder="Send message..." />
+              
             
             </div>
             <div class="container text-right m-2">
-            <button
-            class="btn btn-danger m-auto"
-            (click)="salir()"
-            >Salir
-        </button>
+         
             </div>
         
         
@@ -68,7 +73,9 @@
                 <tbody>
                   <tr>
                     <td>
-                        <p *ngFor="let users of usuarios" style="color: white;opacity:0.75;">{{users.email}}</p>
+                        <p *ngFor="let users of usuarios" 
+                        [ngClass]="{'badge-primary':usuarionombre == users.email}"
+                        style="color: white;opacity:0.75;">{{users.email}}</p>
                     </td>
                    
                   </tr>

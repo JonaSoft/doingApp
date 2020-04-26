@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 //import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Mensaje } from '../interfaces/mensaje.interface';
-import { User} from '../interfaces/user.interface'
+import { User} from '../interfaces/user.interface';
 import { Observable } from 'rxjs';
 //import 'rxjs/add/observable/of';
 //import 'rxjs/add/operator/map';
@@ -33,7 +33,7 @@ export class FirestorechatsService {
     //retorna cambios en colecciones
     return this.itemsCollection.valueChanges().pipe(
                              map( (mensajes:Mensaje[]) =>{
-                                console.log(mensajes)
+                                //console.log(mensajes)
                                 //this.chats=mensajes
                                 this.chats=[];
                                 for ( let mensaje of mensajes){
@@ -42,9 +42,10 @@ export class FirestorechatsService {
                                 }
                                 return this.chats;
                               })
-                            )     
+            )     
                             
   }
+  
   cargarUsers(){
     
     return this.users1 = this.itemsUsers1.snapshotChanges()
@@ -64,8 +65,10 @@ export class FirestorechatsService {
   agregarMensajes(texto:string,usuarionombre:string){
       let datamensaje: Mensaje = {
         nombre:usuarionombre,
+        url:'',
         mensaje:texto,
-        fecha:new Date().getTime()
+        fecha:new Date().getTime(),
+
       }
 
       return this.itemsCollection.add(datamensaje);

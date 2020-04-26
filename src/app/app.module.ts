@@ -16,6 +16,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 
 import {  FirestorechatsService } from "./servicios/firestorechats.service";
+import { CargaImagenesService} from '../app/servicios/carga-imagenes.service';
+import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
+import { NavbarComponent } from './pages/navbar/navbar.component';
 
 
 @NgModule({
@@ -23,7 +26,9 @@ import {  FirestorechatsService } from "./servicios/firestorechats.service";
     AppComponent,
     RegistroComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    NgDropFilesDirective,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,8 @@ import {  FirestorechatsService } from "./servicios/firestorechats.service";
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
-    FirestorechatsService
+    FirestorechatsService,
+    CargaImagenesService
   ],
   bootstrap: [AppComponent]
 })

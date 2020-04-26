@@ -1,8 +1,8 @@
 .contenedorchat {
     margin-top:3px;
     border: 3px outset black;
-    width:80%;
-    max-width: 80%;
+    width:90%;
+    max-width: 90%;
     min-width: 50%;
     height: auto;
     background: black;
@@ -14,7 +14,7 @@
 }
 
 .chat-window {
-    height: 360px;
+    height: 450px;
     min-height: auto;
     overflow: hidden;
     border: 3px outset gray;
@@ -32,7 +32,7 @@
 
 .app-mensajes {
     overflow-y: scroll;
-    height: 350px;
+    height: 440px;
     padding: 3px;
     font-family: tahoma;
     font-size: 15px;
@@ -44,7 +44,11 @@
     color: rgb(219, 215, 215);
     font-family: tahoma,cursive;
 }
-
+/*cuando se envian imagenes*/
+.file-over {
+    border: 2px dotted rgb(56, 224, 106);
+    background-color: rgb(118, 119, 122);
+}
 
 /* Animaciones */
 

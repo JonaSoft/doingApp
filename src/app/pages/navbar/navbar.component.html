@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-lg  bg-dark">
+    <a class="navbar-brand" href="#">Doing App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link"  [routerLink]="['/home']">Home <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item">
+          <a (click)="salir()" class="nav-link" href="#">Logout</a>
+        </li>
+      </ul>
+       <span class="textousuario text-left mt-2">  {{ this.usuario}}</span>
+    </div>
+  </nav>
+
+<!--
+<div class="container-fluid fondonavbar">
+   <div class="row">
+        <div class="col-lg-3 col-sm-12" style="padding:5px;">
+            <img src="./assets/img/favicon.ico" class="rounded" width="50" height="35"alt=""> <span class="margenes"> Doing </span>
+            
+        </div>
+        <div class="col-lg-5  col-sm-12 container d-flex justify-content-end" style="padding:5px;">
+               
+           
+        </div>
+        <div class="col-lg-4 col-sm-12 container d-flex justify-content-end">
+                <ul class="nav justify-content-end ">
+                      
+                        <li class="nav-item">
+                            <span id='search' class="nav-item nav-link ml-2 r  estilomenuinicio" [routerLink]="['/home']">Home</span>
+                        </li>
+                         <li class="nav-item">
+                            <a (click)="logout()" href="#"class=" nav-item nav-link r estilomenu" type="text">Logout</a>
+                        </li>
+                        
+                </ul>
+
+                <img src="../../../assets/img/usuarioblack.png" class="rounded-circle m-2" width="25" height="25"alt="">    
+                <span class="textousuario text-left mt-2">  {{ this.usuario}}</span>
+        </div>
+    </div>
+</div>
+
+-->

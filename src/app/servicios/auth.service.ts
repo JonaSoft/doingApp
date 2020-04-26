@@ -112,7 +112,7 @@ export class AuthService {
   //LEER USUARIO
   leerEmail(){
     if ( localStorage.getItem('email')){
-          console.log(localStorage.getItem('email'))
+          //console.log(localStorage.getItem('email'))
           return this.usuarioEmail = localStorage.getItem('email');
     } else {
           return this.usuarioEmail = "";

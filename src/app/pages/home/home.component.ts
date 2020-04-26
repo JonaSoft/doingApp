@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { FirestorechatsService } from '../../servicios/firestorechats.service'
-import { AuthService} from '../../servicios/auth.service'
-
-
+import { AuthService} from '../../servicios/auth.service';
+import { FileItem } from  '../../models/file-item'
+import { CargaImagenesService } from 'src/app/servicios/carga-imagenes.service';
+//para ver imagen e4n el chat
+export interface Item { email:string;nombre: string; url:string}
 
 
 @Component({
@@ -15,21 +17,33 @@ import { AuthService} from '../../servicios/auth.service'
 })
 export class HomeComponent implements OnInit {
 
+//archivos images sobre el input
+  estaSobreInput = false;
+  archivos: FileItem[]=[]
+
+
+//******************************************
+
   mensaje:string ="";
-  elemento:any;
+  public elemento:any;
   public usuarionombre:string="";
   public chats: Observable<any[]>;
   public mensajes:any[]=[];
   public users: Observable<any[]>;
-  public usuarios=[]
-
+  public usuarios=[];
+  private itemsCollection: AngularFirestoreCollection<Item>
+  items: Observable<Item[]>;
   constructor(  private auth:AuthService,
                 private router:Router,
                 public db: AngularFirestore,
+                public afs: AngularFirestore,
                 public _cs: FirestorechatsService,
-                public _usuario: AuthService
-                )
+                public _usuario: AuthService,
+                public _cargaImagenes: CargaImagenesService
+             )
        {
+        this.itemsCollection = afs.collection<Item>('img');
+        this.items = this.itemsCollection.valueChanges(); 
         this.usuarionombre = this._usuario.leerEmail() 
         //oir cambios en collecciones de chats            
         this.chats = db.collection('chats').valueChanges();
@@ -39,15 +53,15 @@ export class HomeComponent implements OnInit {
         //cargar mensajes des el servicio
         this._cs.cargarMensajes()
           .subscribe( (res)=>{
-            console.log(res.length)
+            //console.log(res.length)
             //console.log('mensajes',res[7].nombre)
             //console.log(localStorage.getItem('email'))
             let elemento = res.length
             elemento=elemento-1
-            console.log(elemento)
+            //console.log(elemento)
             if (elemento!=-1){
               if (res[elemento].nombre!=localStorage.getItem('email')){
-                this.reproducir()
+                //this.reproducir()
               }
               setTimeout(() => {
                 this.elemento.scrollTop = this.elemento.scrollHeight;
@@ -60,10 +74,12 @@ export class HomeComponent implements OnInit {
 
         this._cs.cargarUsers()
           .subscribe(users=>{
-            console.log(users)
+            //console.log(users)
+            let eliminausersuario = this.usuarios.filter(porborrar => porborrar.email == localStorage.getItem('email'))
             this.usuarios=users
 
           })
+         
        }
 
   ngOnInit() {
@@ -87,7 +103,10 @@ export class HomeComponent implements OnInit {
         
       })
       .catch((err)=>console.log(err))
+      //this._cargaImagenes.cargarImagenesFirebase(this.archivos)  
+      this.elemento.scrollTop = this.elemento.scrollHeight;
   }
+  
   
   salir(){
     let eliminausuario = this.usuarios.filter(porborrar => porborrar.email == localStorage.getItem('email'))
@@ -105,6 +124,21 @@ export class HomeComponent implements OnInit {
   reproducir() {
     const audio = new Audio('assets/sound/iphone.mp3');
     audio.play();
+  }
+
+// para cargar imagenes 
+cargarImagenes(){
+  this._cargaImagenes.cargarImagenesFirebase(this.archivos)
+  
+  
 }
+pruebaSobreInput( event){
+  //console.log('aqui trabaja',event)
+  if(!event){
+    this._cargaImagenes.cargarImagenesFirebase(this.archivos)  
+  }
+}
+
+
 
 }
