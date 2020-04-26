@@ -1,9 +1,9 @@
 .contenedorchat {
     margin-top:3px;
     border: 3px outset black;
-    width:90%;
+    width:100%;
     max-width: 90%;
-    min-width: 50%;
+    min-width: 100%;
     height: auto;
     background: black;
     color: gray;
@@ -39,10 +39,10 @@
 }
 
 .titulousuarios {
-    font-size:18px;
+    font-size:15px;
     
-    color: rgb(219, 215, 215);
-    font-family: tahoma,cursive;
+    color: rgb(228, 240, 123);
+    font-family: cursive;
 }
 /*cuando se envian imagenes*/
 .file-over {

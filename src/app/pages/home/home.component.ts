@@ -61,12 +61,12 @@ export class HomeComponent implements OnInit {
             //console.log(elemento)
             if (elemento!=-1){
               if (res[elemento].nombre!=localStorage.getItem('email')){
-                //this.reproducir()
+                this.reproducir()
               }
               setTimeout(() => {
                 this.elemento.scrollTop = this.elemento.scrollHeight;
                 
-              }, 25);
+              }, 2500);
             }
             
              
@@ -75,8 +75,9 @@ export class HomeComponent implements OnInit {
         this._cs.cargarUsers()
           .subscribe(users=>{
             //console.log(users)
-            let eliminausersuario = this.usuarios.filter(porborrar => porborrar.email == localStorage.getItem('email'))
-            this.usuarios=users
+            let eliminauserusuario =users.filter(porborrar => porborrar.email != localStorage.getItem('email'));
+            this.usuarios=eliminauserusuario;
+            console.log(this.usuarios)
 
           })
          
@@ -121,6 +122,7 @@ export class HomeComponent implements OnInit {
     this.auth.logout();
     this.router.navigateByUrl('/login')
   }
+  
   reproducir() {
     const audio = new Audio('assets/sound/iphone.mp3');
     audio.play();

@@ -1,14 +1,17 @@
+
 <app-navbar></app-navbar>
-<div class="row mt-2" >
+
+<div class="container">
+<div class="row mt-2 p-auto" >
     
-  <div class="col-md-6 d-flex justify-content-center">
+  <div class="container col-md-6 d-flex justify-content-center">
 
   
         <div class="contenedorchat"style="padding:3px;">
             
         
             <div class="col-md-12  text-center">
-                <span class="titulousuarios">Doing App </span>
+                <span class="titulousuarios text-white">Doing App</span> 
             </div>
             <br>
             <div class="container-fluid chat-window" style="background:white; color: black;border-radius:5px 5px 5px 5px;">
@@ -18,7 +21,7 @@
                         <div [ngClass]="{'text-left ':usuarionombre != chat.nombre,
 
                                         'text-right ':usuarionombre == chat.nombre}">
-                            <span class="badge" [ngClass]="{'badge-primary':usuarionombre == chat.nombre,
+                            <span class="badge" style="font-size:13px;"[ngClass]="{'badge-primary':usuarionombre == chat.nombre,
                                             'badge-success':usuarionombre != chat.nombre }">
                                 {{chat.nombre}}
                             </span>
@@ -29,15 +32,12 @@
                                 </span>
                             </div>
                             {{chat.mensaje}}
-                            <a [href]="chat.url" class="card-title">
+                            <a [href]="chat.url" target= "_blank" class="card-title">
                                 <img [src]="chat.url" class="card-img-top"  style="width:50%; height:auto;">    
                             </a>
                            
                         </div>
-                       
-                    
-                        
-                        
+                        <br>
                     </div>
                     
                 </div>
@@ -51,16 +51,17 @@
               
             
             </div>
-            <div class="container text-right m-2">
+            <div class="container text-right m-3">
          
             </div>
         
         
         </div>
-    </div>
-    <div class="col-md-6 d-flex justify-content-center p-2">
+  </div>
+  <div class="container col-md-3 d-flex justify-content-center p-auto ">
         <br>
-        <div  class="container m-auto" style="width:50%; height:auto; overflow-y: auto;border: 2px solid white;background-color: black;">
+        <br>
+        <div  class="container m-auto mt-2" style="width:100%; height:auto; overflow-y: auto;border: 1px solid white;background-color: black;">
             
             <table class="table table-dark mt-3">
                
@@ -85,8 +86,8 @@
 
         
         </div>
-    </div>
-
+  </div>
+</div>
 </div>
 
 
